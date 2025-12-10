@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pokémon GO Raid Counter Simplifier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Simple Pokémon GO raid counter tool. Choose a raid boss and weather to see the best counters."
+  />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin: 0.5rem 0;
+    }
+
+    .card {
+      background: #020617;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      border: 1px solid #1f2937;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    input, select, button {
+      border-radius: 0.5rem;
+      border: 1px solid #374151;
+      padding: 0.6rem 0.75rem;
+      font-size: 0.95rem;
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #3b82f6;
+      outline-offset: 1px;
+    }
+
+    button {
+      border: none;
+      background: #3b82f6;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.05s ease, box-shadow 0.1s ease, background 0.1s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5);
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.45);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 640px) {
+      .form-grid {
+        grid-template-columns: 2fr 1fr 1fr;
+        align-items: end;
+      }
+    }
+
+    .results {
+      margin-top: 1.5rem;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.75rem;
+    }
+
+    .boss-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .boss-meta {
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid #4b5563;
+      padding: 0.15rem 0.6rem;
+      font-size: 0.75rem;
+      margin-left: 0.3rem;
+    }
+
+    .type-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0.15rem 0.5rem;
+      font-size: 0.7rem;
+      margin-right: 0.25rem;
+      margin-bottom: 0.1rem;
+      border: 1px solid #4b5563;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .counter-card {
+      background: #020617;
+      border-radius: 0.75rem;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid #1f2937;
+      margin-bottom: 0.6rem;
+    }
+
+    .counter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.25rem;
+    }
+
+    .counter-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .boosted-tag {
+      font-size: 0.7rem;
+      border-radius: 999px;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid #22c55e;
+      color: #bbf7d0;
+    }
+
+    .moves {
+      font-size: 0.85rem;
+      color: #d1d5db;
+      margin-bottom: 0.2rem;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+
+    .empty-state {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .hint {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Raid Counter Simplifier</h1>
+      <p style="color:#9ca3af;font-size:0.9rem;margin:0;">
+        Choose a raid boss and weather. Get clean, weather-aware counter suggestions.
+      </p>
+    </header>
+
+    <main class="card">
+      <form id="raid-form">
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="boss-input">Raid boss</label>
+            <input
+              id="boss-input"
+              name="boss"
+              list="boss-list"
+              placeholder="e.g. Kyogre, Groudon, Rayquaza"
+              autocomplete="off"
+            />
+            <datalist id="boss-list">
+              <!-- Populated by JS -->
+            </datalist>
+          </div>
+
+          <div class="form-row">
+            <label for="weather-select">Weather</label>
+            <select id="weather-select" name="weather">
+              <option value="">No boost / Unknown</option>
+              <option value="clear">Clear / Sunny</option>
+              <option value="rainy">Rainy</option>
+              <option value="partly_cloudy">Partly Cloudy</option>
+              <option value="cloudy">Cloudy</option>
+              <option value="windy">Windy</option>
+              <option value="snow">Snow</option>
+              <option value="fog">Fog</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label>&nbsp;</label>
+            <button type="submit">Suggest counters</button>
+          </div>
+        </div>
+      </form>
+
+      <section id="results" class="results"></section>
+
+      <p class="hint">
+        Tip: start with a small boss list and expand over time. Keep everything fast and simple.
+      </p>
+    </main>
+  </div>
+
+  <script>
+    // --- Weather → type boost mapping ---
+    const weatherBoosts = {
+      clear: ["Grass", "Ground", "Fire"],
+      rainy: ["Water", "Electric", "Bug"],
+      partly_cloudy: ["Normal", "Rock"],
+      cloudy: ["Fairy", "Fighting", "Poison"],
+      windy: ["Dragon", "Flying", "Psychic"],
+      snow: ["Ice", "Steel"],
+      fog: ["Dark", "Ghost"],
+    };
+
+    // --- Example raid boss data ---
+    // Add more bosses to this list as you grow the site.
+    const raidBosses = [
+      {
+        name: "Kyogre",
+        tier: 5,
+        types: ["Water"],
+        recommendedCounters: [
+          {
+            name: "Zekrom",
+            types: ["Electric", "Dragon"],
+            fastMove: "Charge Beam",
+            chargedMove: "Wild Charge",
+            note: "Top Electric attacker; excels in Rainy weather."
+          },
+          {
+            name: "Raikou",
+            types: ["Electric"],
+            fastMove: "Thunder Shock",
+            chargedMove: "Wild Charge",
+            note: "Strong and accessible Electric counter."
+          },
+          {
+            name: "Kartana",
+            types: ["Grass", "Steel"],
+            fastMove: "Razor Leaf",
+            chargedMove: "Leaf Blade",
+            note: "Glass cannon; huge damage in Clear weather."
+          },
+        ],
+      },
+      {
+        name: "Groudon",
+        tier: 5,
+        types: ["Ground"],
+        recommendedCounters: [
+          {
+            name: "Kyogre",
+            types: ["Water"],
+            fastMove: "Waterfall",
+            chargedMove: "Surf",
+            note: "Classic Water counter; boosted in Rainy weather."
+          },
+          {
+            name: "Swampert",
+            types: ["Water", "Ground"],
+            fastMove: "Mud Shot",
+            chargedMove: "Hydro Cannon",
+            note: "Community Day move; strong, spammy Water damage."
+          },
+          {
+            name: "Roserade",
+            types: ["Grass", "Poison"],
+            fastMove: "Razor Leaf",
+            chargedMove: "Grass Knot",
+            note: "Grass attacker; shines in Clear weather."
+          },
+        ],
+      },
+      {
+        name: "Rayquaza",
+        tier: 5,
+        types: ["Dragon", "Flying"],
+        recommendedCounters: [
+          {
+            name: "Mamoswine",
+            types: ["Ice", "Ground"],
+            fastMove: "Powder Snow",
+            chargedMove: "Avalanche",
+            note: "One of the best Ice counters; even better in Snow."
+          },
+          {
+            name: "Weavile",
+            types: ["Dark", "Ice"],
+            fastMove: "Ice Shard",
+            chargedMove: "Avalanche",
+            note: "High DPS Ice attacker, but frail."
+          },
+          {
+            name: "Glaceon",
+            types: ["Ice"],
+            fastMove: "Frost Breath",
+            chargedMove: "Avalanche",
+            note: "Strong Ice specialist for Rayquaza raids."
+          },
+        ],
+      },
+    ];
+
+    // --- Populate boss datalist ---
+    const bossInput = document.getElementById("boss-input");
+    const bossList = document.getElementById("boss-list");
+    raidBosses
+      .slice()
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .forEach((boss) => {
+        const opt = document.createElement("option");
+        opt.value = boss.name;
+        bossList.appendChild(opt);
+      });
+
+    function findBossByName(name) {
+      if (!name) return null;
+      const lower = name.trim().toLowerCase();
+      return raidBosses.find((b) => b.name.toLowerCase() === lower) || null;
+    }
+
+    function getBoostedTypes(weatherKey) {
+      if (!weatherKey || !weatherBoosts[weatherKey]) return [];
+      return weatherBoosts[weatherKey];
+    }
+
+    function renderResults(boss, weatherKey) {
+      const container = document.getElementById("results");
+      container.innerHTML = "";
+
+      if (!boss) {
+        container.innerHTML =
+          '<div class="empty-state">No raid boss found. Try typing the exact name from the list (e.g., "Kyogre").</div>';
+        return;
+      }
+
+      const boostedTypes = getBoostedTypes(weatherKey);
+
+      // Sort counters: weather-boosted types first
+      const counters = boss.recommendedCounters.slice().sort((a, b) => {
+        const aBoosted = a.types.some((t) => boostedTypes.includes(t));
+        const bBoosted = b.types.some((t) => boostedTypes.includes(t));
+        if (aBoosted === bBoosted) return 0;
+        return aBoosted ? -1 : 1;
+      });
+
+      const header = document.createElement("div");
+      header.className = "results-header";
+
+      const left = document.createElement("div");
+      left.innerHTML = `
+        <div class="boss-name">${boss.name}</div>
+        <div class="boss-meta">
+          Tier ${boss.tier}
+          ${boss.types
+            .map((t) => `<span class="type-badge">${t}</span>`)
+            .join(" ")}
+        </div>
+      `;
+
+      const right = document.createElement("div");
+      const weatherLabel = (() => {
+        switch (weatherKey) {
+          case "clear":
+            return "Clear / Sunny";
+          case "rainy":
+            return "Rainy";
+          case "partly_cloudy":
+            return "Partly Cloudy";
+          case "cloudy":
+            return "Cloudy";
+          case "windy":
+            return "Windy";
+          case "snow":
+            return "Snow";
+          case "fog":
+            return "Fog";
+          default:
+            return "No weather boost";
+        }
+      })();
+
+      right.innerHTML = `
+        <span class="chip">
+          Weather: ${weatherLabel}
+        </span>
+      `;
+
+      header.appendChild(left);
+      header.appendChild(right);
+      container.appendChild(header);
+
+      if (!counters.length) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.textContent = "No counters defined yet for this boss.";
+        container.appendChild(empty);
+        return;
+      }
+
+      counters.forEach((c) => {
+        const isBoosted = c.types.some((t) => boostedTypes.includes(t));
+        const card = document.createElement("article");
+        card.className = "counter-card";
+        card.innerHTML = `
+          <div class="counter-header">
+            <div class="counter-name">${c.name}</div>
+            ${
+              isBoosted
+                ? '<div class="boosted-tag">Weather boosted</div>'
+                : ""
+            }
+          </div>
+          <div class="moves">
+            <strong>Types:</strong> ${c.types
+              .map((t) => `<span class="type-badge">${t}</span>`)
+              .join(" ")}
+          </div>
+          <div class="moves">
+            <strong>Moveset:</strong> ${c.fastMove} &raquo; ${c.chargedMove}
+          </div>
+          ${
+            c.note
+              ? `<div class="note">${c.note}</div>`
+              : ""
+          }
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // --- Handle form submit ---
+    const form = document.getElementById("raid-form");
+    const weatherSelect = document.getElementById("weather-select");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const bossName = bossInput.value;
+      const weatherKey = weatherSelect.value;
+      const boss = findBossByName(bossName);
+      renderResults(boss, weatherKey);
+    });
+  </script>
+</body>
+</html>
