@@ -20,59 +20,64 @@
     </header>
 
     <main class="card">
-      <form id="raid-form">
-        <div class="form-grid">
-          <div class="form-row">
-            <label for="boss-input">Raid boss</label>
-            <input
-              id="boss-input"
-              name="boss"
-              list="boss-list"
-              placeholder="e.g. Kyurem"
-              autocomplete="off"
-            />
-            <datalist id="boss-list">
-              <!-- Populated by JS -->
-            </datalist>
-          </div>
+  <form id="raid-form">
+    <div class="form-grid">
+      <div class="form-row">
+        <label for="boss-input">Raid boss</label>
+        <input
+          id="boss-input"
+          name="boss"
+          list="boss-list"
+          placeholder="e.g. Kyurem"
+          autocomplete="off"
+        />
+        <datalist id="boss-list">
+          <!-- Populated by JS -->
+        </datalist>
+      </div>
 
-          <div class="form-row">
-            <label for="weather-select">Weather</label>
-            <select id="weather-select" name="weather">
-              <option value="">No boost / Unknown</option>
-              <option value="clear">Clear / Sunny</option>
-              <option value="rainy">Rainy</option>
-              <option value="partly_cloudy">Partly Cloudy</option>
-              <option value="cloudy">Cloudy</option>
-              <option value="windy">Windy</option>
-              <option value="snow">Snow</option>
-              <option value="fog">Fog</option>
-            </select>
-          </div>
+      <div class="form-row">
+        <label for="weather-select">Weather</label>
+        <select id="weather-select" name="weather">
+          <option value="">No boost / Unknown</option>
+          <option value="clear">Clear / Sunny</option>
+          <option value="rainy">Rainy</option>
+          <option value="partly_cloudy">Partly Cloudy</option>
+          <option value="cloudy">Cloudy</option>
+          <option value="windy">Windy</option>
+          <option value="snow">Snow</option>
+          <option value="fog">Fog</option>
+        </select>
+      </div>
 
-          <div class="form-row">
-            <label>&nbsp;</label>
-            <button type="submit">Suggest counters</button>
-          </div>
-        </div>
-      </form>
+      <div class="form-row">
+        <label>&nbsp;</label>
+        <button type="submit">Suggest counters</button>
+      </div>
+    </div>
+  </form>
 
-      <section id="results" class="results"></section>
+  <div class="section-divider"></div>
 
-      <section class="tips">
-        <h2>Kyurem raid tips</h2>
-        <ul>
-          <li>Dodge <strong>Draco Meteor</strong> to reduce group fainting.</li>
-          <li>Prioritize strong <strong>Steel</strong> and <strong>Fighting</strong> types for best efficiency.</li>
-          <li>Use <strong>Mega</strong> evolutions to boost both your damage and your lobby’s damage.</li>
-          <li>Snow or Windy weather will boost Kyurem’s CP and damage.</li>
-        </ul>
-      </section>
+  <h2 class="section-title">Kyurem raid overview</h2>
+  <section id="results" class="results"></section>
 
-      <p class="hint">
-        Tip: this page auto-loads Kyurem. Later, you can add more bosses to the list with minimal changes.
-      </p>
-    </main>
+  <div class="section-divider"></div>
+
+  <h2 class="section-title">Raid tips</h2>
+  <section class="tips">
+    <ul>
+      <li>Dodge <strong>Draco Meteor</strong> to reduce group fainting.</li>
+      <li>Prioritize strong <strong>Steel</strong> and <strong>Fighting</strong> types for best efficiency.</li>
+      <li>Use <strong>Mega</strong> evolutions to boost both your damage and your lobby’s damage.</li>
+      <li>Snow or Windy weather will boost Kyurem’s CP and damage.</li>
+    </ul>
+  </section>
+
+  <p class="hint">
+    This page auto-loads Kyurem. When raid bosses rotate, you can simply update the data file to switch focus.
+  </p>
+</main>
   </div>
 
   <!-- Main app script, using ES modules -->
