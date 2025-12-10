@@ -1,4 +1,3 @@
-// js/render.js
 import { getBoostedTypes, getWeatherLabel } from "./weather.js";
 
 export function renderResults(boss, weatherKey) {
@@ -20,6 +19,8 @@ export function renderResults(boss, weatherKey) {
     if (aBoosted === bBoosted) return 0;
     return aBoosted ? -1 : 1;
   });
+
+  /* ---------- Header / boss info ---------- */
 
   const header = document.createElement("div");
   header.className = "results-header";
@@ -107,25 +108,58 @@ export function renderResults(boss, weatherKey) {
     return;
   }
 
-  counters.forEach((c) => {
-    const isBoosted = c.types.some((t) => boostedTypes.includes(t));
-    const card = document.createElement("article");
-    card.className = "counter-card";
-    card.innerHTML = `
-      <div class="counter-header">
-        <div class="counter-name">${c.name}</div>
-        ${isBoosted ? '<div class="boosted-tag">Weather boosted</div>' : ""}
-      </div>
-      <div class="moves">
-        <strong>Types:</strong> ${c.types
-          .map((t) => `<span class="type-badge">${t}</span>`)
-          .join(" ")}
-      </div>
-      <div class="moves">
-        <strong>Moveset:</strong> ${c.fastMove} &raquo; ${c.chargedMove}
-      </div>
-      ${c.note ? `<div class="note">${c.note}</div>` : ""}
-    `;
-    container.appendChild(card);
-  });
+  /* ---------- Counters list with 'Show all' toggle ---------- */
+
+  const listContainer = document.createElement("div");
+  container.appendChild(listContainer);
+
+  const SHOW_LIMIT = 3;
+  let expanded = false;
+
+  function renderList() {
+    listContainer.innerHTML = "";
+    const limit = expanded ? counters.length : Math.min(SHOW_LIMIT, counters.length);
+    counters.slice(0, limit).forEach((c) => {
+      const isBoosted = c.types.some((t) => boostedTypes.includes(t));
+      const card = document.createElement("article");
+      card.className = "counter-card";
+      card.innerHTML = `
+        <div class="counter-header">
+          <div class="counter-name">${c.name}</div>
+          ${isBoosted ? '<div class="boosted-tag">Weather boosted</div>' : ""}
+        </div>
+        <div class="moves">
+          <strong>Types:</strong> ${c.types
+            .map((t) => `<span class="type-badge">${t}</span>`)
+            .join(" ")}
+        </div>
+        <div class="moves">
+          <strong>Moveset:</strong> ${c.fastMove} &raquo; ${c.chargedMove}
+        </div>
+        ${c.note ? `<div class="note">${c.note}</div>` : ""}
+      `;
+      listContainer.appendChild(card);
+    });
+  }
+
+  renderList();
+
+  if (counters.length > SHOW_LIMIT) {
+    const toggleWrapper = document.createElement("div");
+    toggleWrapper.className = "toggle-wrapper";
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.type = "button";
+    toggleBtn.className = "secondary-button";
+    toggleBtn.textContent = "Show all counters";
+
+    toggleBtn.addEventListener("click", () => {
+      expanded = !expanded;
+      toggleBtn.textContent = expanded ? "Show top 3 only" : "Show all counters";
+      renderList();
+    });
+
+    toggleWrapper.appendChild(toggleBtn);
+    container.appendChild(toggleWrapper);
+  }
 }
