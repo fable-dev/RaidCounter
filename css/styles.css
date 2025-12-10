@@ -1,4 +1,4 @@
-/* Light, but softer and less bright */
+/* Light, soft, and structured UI */
 :root {
   --bg: #e5e7eb;           /* slightly darker page background */
   --card-bg: #f9fafb;      /* soft off-white for cards */
@@ -47,12 +47,31 @@ h1 {
   margin: 0;
 }
 
+/* Card container */
+
 .card {
   background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: 0 8px 20px var(--shadow);
+  border-radius: 1rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  box-shadow: 0 12px 30px var(--shadow);
   border: 1px solid var(--border);
+}
+
+/* Section titles and divider */
+
+.section-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1.25rem 0 1.25rem;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.85rem;
 }
 
 /* Form */
@@ -71,7 +90,7 @@ label {
 input,
 select,
 button {
-  border-radius: 0.5rem;
+  border-radius: 0.6rem;
   border: 1px solid var(--border);
   padding: 0.6rem 0.75rem;
   font-size: 0.95rem;
@@ -108,7 +127,7 @@ button:active {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
 @media (min-width: 640px) {
@@ -121,7 +140,7 @@ button:active {
 /* Results */
 
 .results {
-  margin-top: 1.5rem;
+  margin-top: 0.25rem;
 }
 
 .results-header {
@@ -172,11 +191,11 @@ button:active {
 
 .counter-card {
   background: #ffffff;
-  border-radius: var(--radius);
+  border-radius: 0.9rem;
   border: 1px solid var(--border);
-  padding: 1rem 1rem;
+  padding: 0.9rem 1rem;
   margin-bottom: 0.8rem;
-  box-shadow: 0 2px 6px var(--shadow);
+  box-shadow: 0 3px 7px var(--shadow);
 }
 
 .counter-header {
@@ -223,7 +242,7 @@ button:active {
 
 .toggle-wrapper {
   text-align: center;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 .secondary-button {
@@ -244,17 +263,10 @@ button:active {
 /* Tips */
 
 .tips {
-  margin-top: 2rem;
   background: #eef2f7;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1rem;
-}
-
-.tips h2 {
-  font-size: 1.05rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid #d4d8e0;
 }
 
 .tips ul {
@@ -274,3 +286,4 @@ button:active {
   color: var(--text-muted);
   text-align: center;
 }
+
