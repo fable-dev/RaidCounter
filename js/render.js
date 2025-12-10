@@ -1,13 +1,86 @@
 // js/render.js
 import { getBoostedTypes, getWeatherLabel } from "./weather.js";
 
+// Map primary type to a simple emoji icon
+function getTypeIcon(types = []) {
+  const primary = types[0];
+  const map = {
+    Dragon: "🐉",
+    Ice: "❄️",
+    Fire: "🔥",
+    Water: "💧",
+    Grass: "🌿",
+    Rock: "🪨",
+    Steel: "⚙️",
+    Fairy: "✨",
+    Fighting: "🥊",
+    Electric: "⚡️",
+    Dark: "🌘",
+    Ghost: "👻",
+    Psychic: "🔮",
+    Ground: "🌋",
+    Flying: "🕊️",
+    Bug: "🐛",
+    Normal: "⭐",
+    Poison: "☠️",
+  };
+  return map[primary] || "⭐";
+}
+
+function renderHero(boss) {
+  const titleEl = document.getElementById("hero-title");
+  const line1El = document.getElementById("hero-line-1");
+  const line2El = document.getElementById("hero-line-2");
+  const line3El = document.getElementById("hero-line-3");
+  const pillEl = document.getElementById("hero-pill");
+  const iconEl = document.getElementById("hero-icon");
+
+  if (!boss || !titleEl || !pillEl) return;
+
+  // Title: "Best <name> counters in Pokémon GO"
+  titleEl.textContent = `Best ${boss.name} counters in Pokémon GO`;
+
+  // Use quickSummary if present, fallback to generic constructed lines
+  if (boss.quickSummary) {
+    line1El.textContent = boss.quickSummary.line1 || "";
+    line2El.textContent = boss.quickSummary.line2 || "";
+    line3El.textContent = boss.quickSummary.line3 || "";
+  } else {
+    const typeLine = boss.types
+      ? `${boss.name} is a ${boss.types.join(" / ")} raid boss in Pokémon GO.`
+      : `${boss.name} is a raid boss in Pokémon GO.`;
+
+    const weaknessLine = boss.weaknesses
+      ? `It is weak to ${boss.weaknesses.join(", ")}-type moves.`
+      : "";
+
+    line1El.textContent = typeLine;
+    line2El.textContent = weaknessLine;
+    line3El.textContent = "";
+  }
+
+  const pillParts = [];
+  if (boss.tier) pillParts.push(`Tier ${boss.tier}`);
+  if (boss.category) pillParts.push(boss.category);
+  pillEl.textContent = pillParts.join(" · ") || "Raid boss";
+
+  if (iconEl) {
+    iconEl.textContent = getTypeIcon(boss.types);
+  }
+}
+
 export function renderResults(boss, weatherKey) {
   const container = document.getElementById("results");
   container.innerHTML = "";
 
+  // Always update hero first
+  if (boss) {
+    renderHero(boss);
+  }
+
   if (!boss) {
     container.innerHTML =
-      '<div class="empty-state">No raid boss found. Try typing "Kyurem" exactly as shown.</div>';
+      '<div class="empty-state">No raid boss found. Try typing a name from the list.</div>';
     return;
   }
 
@@ -206,7 +279,9 @@ export function renderResults(boss, weatherKey) {
 
     toggleBtn.addEventListener("click", () => {
       expanded = !expanded;
-      toggleBtn.textContent = expanded ? "Show top 3 only" : "Show all counters";
+      toggleBtn.textContent = expanded
+        ? "Show top 3 only"
+        : "Show all counters";
       renderRows();
     });
 
