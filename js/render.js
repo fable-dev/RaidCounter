@@ -1,3 +1,4 @@
+// js/render.js
 import { getBoostedTypes, getWeatherLabel } from "./weather.js";
 
 export function renderResults(boss, weatherKey) {
@@ -20,7 +21,7 @@ export function renderResults(boss, weatherKey) {
     return aBoosted ? -1 : 1;
   });
 
-  /* ---------- Header / boss info ---------- */
+  /* ---------- Boss header ---------- */
 
   const header = document.createElement("div");
   header.className = "results-header";
@@ -95,7 +96,7 @@ export function renderResults(boss, weatherKey) {
   if (boss.recommendedTeam) {
     const teamInfo = document.createElement("div");
     teamInfo.className = "boss-meta";
-    teamInfo.style.marginTop = "0.5rem";
+    teamInfo.style.marginTop = "0.25rem";
     teamInfo.textContent = boss.recommendedTeam;
     container.appendChild(teamInfo);
   }
@@ -108,41 +109,91 @@ export function renderResults(boss, weatherKey) {
     return;
   }
 
-  /* ---------- Counters list with 'Show all' toggle ---------- */
-
-  const listContainer = document.createElement("div");
-  container.appendChild(listContainer);
+  /* ---------- Table + show-all toggle ---------- */
 
   const SHOW_LIMIT = 3;
   let expanded = false;
 
-  function renderList() {
-    listContainer.innerHTML = "";
+  const tableWrapper = document.createElement("div");
+  tableWrapper.className = "table-wrapper";
+
+  const table = document.createElement("table");
+  table.className = "counter-table";
+
+  const thead = document.createElement("thead");
+  thead.innerHTML = `
+    <tr>
+      <th class="col-rank">#</th>
+      <th class="col-attacker">Attacker</th>
+      <th class="col-move">Fast move</th>
+      <th class="col-move">Charge move</th>
+      <th class="col-meta">Notes</th>
+    </tr>
+  `;
+  const tbody = document.createElement("tbody");
+
+  table.appendChild(thead);
+  table.appendChild(tbody);
+  tableWrapper.appendChild(table);
+  container.appendChild(tableWrapper);
+
+  function renderRows() {
+    tbody.innerHTML = "";
     const limit = expanded ? counters.length : Math.min(SHOW_LIMIT, counters.length);
-    counters.slice(0, limit).forEach((c) => {
+
+    counters.slice(0, limit).forEach((c, index) => {
       const isBoosted = c.types.some((t) => boostedTypes.includes(t));
-      const card = document.createElement("article");
-      card.className = "counter-card";
-      card.innerHTML = `
-        <div class="counter-header">
-          <div class="counter-name">${c.name}</div>
-          ${isBoosted ? '<div class="boosted-tag">Weather boosted</div>' : ""}
-        </div>
-        <div class="moves">
-          <strong>Types:</strong> ${c.types
+
+      const tr = document.createElement("tr");
+
+      const rankTd = document.createElement("td");
+      rankTd.className = "col-rank";
+      rankTd.textContent = index + 1 + ".";
+      tr.appendChild(rankTd);
+
+      const attackerTd = document.createElement("td");
+      attackerTd.className = "col-attacker";
+      attackerTd.innerHTML = `
+        <div class="attacker-name">${c.name}</div>
+        <div class="attacker-types">
+          ${c.types
             .map((t) => `<span class="type-badge">${t}</span>`)
             .join(" ")}
         </div>
-        <div class="moves">
-          <strong>Moveset:</strong> ${c.fastMove} &raquo; ${c.chargedMove}
-        </div>
-        ${c.note ? `<div class="note">${c.note}</div>` : ""}
       `;
-      listContainer.appendChild(card);
+      tr.appendChild(attackerTd);
+
+      const fastTd = document.createElement("td");
+      fastTd.className = "col-move";
+      fastTd.textContent = c.fastMove;
+      tr.appendChild(fastTd);
+
+      const chargeTd = document.createElement("td");
+      chargeTd.className = "col-move";
+      chargeTd.textContent = c.chargedMove;
+      tr.appendChild(chargeTd);
+
+      const metaTd = document.createElement("td");
+      metaTd.className = "col-meta";
+      metaTd.innerHTML = `
+        ${
+          isBoosted
+            ? '<div class="boosted-pill">Weather boosted</div>'
+            : ""
+        }
+        ${
+          c.note
+            ? `<div class="note-inline">${c.note}</div>`
+            : ""
+        }
+      `;
+      tr.appendChild(metaTd);
+
+      tbody.appendChild(tr);
     });
   }
 
-  renderList();
+  renderRows();
 
   if (counters.length > SHOW_LIMIT) {
     const toggleWrapper = document.createElement("div");
@@ -156,7 +207,7 @@ export function renderResults(boss, weatherKey) {
     toggleBtn.addEventListener("click", () => {
       expanded = !expanded;
       toggleBtn.textContent = expanded ? "Show top 3 only" : "Show all counters";
-      renderList();
+      renderRows();
     });
 
     toggleWrapper.appendChild(toggleBtn);
