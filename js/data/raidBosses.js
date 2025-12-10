@@ -4,7 +4,9 @@ export const raidBosses = [
   {
     name: "Kyurem",
     tier: 5,
+    category: "Legendary",
     types: ["Dragon", "Ice"],
+    weaknesses: ["Fighting", "Steel", "Fairy", "Dragon", "Rock"],
     shinyAvailable: true,
     boostedWeathers: ["snow", "windy"],
     catchCP: {
@@ -18,6 +20,14 @@ export const raidBosses = [
         max: 2553,
         label: "Level 25 (Snow/Windy boost)",
       },
+    },
+    // This powers the dynamic hero banner
+    quickSummary: {
+      line1: "Kyurem is an Ice and Dragon type Legendary Pokémon in Pokémon GO.",
+      line2:
+        "It is weak to Fighting, Steel, Fairy, Dragon, and Rock-type moves.",
+      line3:
+        "Mega Lucario, Mega Rayquaza, Crowned Sword Zacian, and Eternatus are its best counters.",
     },
     summary:
       "Kyurem is a Dragon/Ice Legendary raid boss. It is weak to Dragon, Fairy, Fighting, Rock, and Steel type attacks.",
