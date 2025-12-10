@@ -269,91 +269,94 @@
     // --- Example raid boss data ---
     // Add more bosses to this list as you grow the site.
     const raidBosses = [
+  {
+    name: "Kyurem",
+    tier: 5,
+    types: ["Dragon", "Ice"],
+    shinyAvailable: true,
+    boostedWeathers: ["snow", "windy"],
+    catchCP: {
+      level20: { min: 1791, max: 2042, label: "Level 20 (no weather boost)" },
+      level25: { min: 2239, max: 2553, label: "Level 25 (Snow/Windy boost)" },
+    },
+    summary:
+      "Kyurem is a Dragon/Ice Legendary raid boss. It is weak to Dragon, Fairy, Fighting, Rock, and Steel type attacks.",
+    recommendedTeam:
+      "Ideal: 3–4 high-level Trainers with top counters. Safer: 2–5 high-level or 6–8 lower-level Trainers.",
+    recommendedCounters: [
       {
-        name: "Kyogre",
-        tier: 5,
-        types: ["Water"],
-        recommendedCounters: [
-          {
-            name: "Zekrom",
-            types: ["Electric", "Dragon"],
-            fastMove: "Charge Beam",
-            chargedMove: "Wild Charge",
-            note: "Top Electric attacker; excels in Rainy weather."
-          },
-          {
-            name: "Raikou",
-            types: ["Electric"],
-            fastMove: "Thunder Shock",
-            chargedMove: "Wild Charge",
-            note: "Strong and accessible Electric counter."
-          },
-          {
-            name: "Kartana",
-            types: ["Grass", "Steel"],
-            fastMove: "Razor Leaf",
-            chargedMove: "Leaf Blade",
-            note: "Glass cannon; huge damage in Clear weather."
-          },
-        ],
+        name: "Crowned Sword Zacian",
+        types: ["Fairy", "Steel"],
+        fastMove: "Metal Claw",
+        chargedMove: "Behemoth Blade",
+        note: "Top overall counter; Steel damage exploits Kyurem’s weakness."
       },
       {
-        name: "Groudon",
-        tier: 5,
-        types: ["Ground"],
-        recommendedCounters: [
-          {
-            name: "Kyogre",
-            types: ["Water"],
-            fastMove: "Waterfall",
-            chargedMove: "Surf",
-            note: "Classic Water counter; boosted in Rainy weather."
-          },
-          {
-            name: "Swampert",
-            types: ["Water", "Ground"],
-            fastMove: "Mud Shot",
-            chargedMove: "Hydro Cannon",
-            note: "Community Day move; strong, spammy Water damage."
-          },
-          {
-            name: "Roserade",
-            types: ["Grass", "Poison"],
-            fastMove: "Razor Leaf",
-            chargedMove: "Grass Knot",
-            note: "Grass attacker; shines in Clear weather."
-          },
-        ],
+        name: "Crowned Shield Zamazenta",
+        types: ["Fighting", "Steel"],
+        fastMove: "Metal Claw",
+        chargedMove: "Behemoth Bash",
+        note: "Very strong Steel damage with great bulk."
       },
       {
-        name: "Rayquaza",
-        tier: 5,
-        types: ["Dragon", "Flying"],
-        recommendedCounters: [
-          {
-            name: "Mamoswine",
-            types: ["Ice", "Ground"],
-            fastMove: "Powder Snow",
-            chargedMove: "Avalanche",
-            note: "One of the best Ice counters; even better in Snow."
-          },
-          {
-            name: "Weavile",
-            types: ["Dark", "Ice"],
-            fastMove: "Ice Shard",
-            chargedMove: "Avalanche",
-            note: "High DPS Ice attacker, but frail."
-          },
-          {
-            name: "Glaceon",
-            types: ["Ice"],
-            fastMove: "Frost Breath",
-            chargedMove: "Avalanche",
-            note: "Strong Ice specialist for Rayquaza raids."
-          },
-        ],
+        name: "Mega Lucario",
+        types: ["Fighting", "Steel"],
+        fastMove: "Force Palm",
+        chargedMove: "Aura Sphere",
+        note: "Massive Fighting DPS and team-boosting Mega."
       },
-    ];
+      {
+        name: "Dusk Mane Necrozma",
+        types: ["Psychic", "Steel"],
+        fastMove: "Metal Claw",
+        chargedMove: "Sunsteel Strike",
+        note: "Premium Steel attacker; very reliable counter."
+      },
+      {
+        name: "Mega Blaziken",
+        types: ["Fire", "Fighting"],
+        fastMove: "Counter",
+        chargedMove: "Aura Sphere",
+        note: "High Fighting DPS; fragile but very strong."
+      },
+      {
+        name: "Resolute Keldeo",
+        types: ["Water", "Fighting"],
+        fastMove: "Low Kick",
+        chargedMove: "Secret Sword",
+        note: "Strong Fighting damage, good neutral coverage."
+      },
+      {
+        name: "Shadow Metagross",
+        types: ["Steel", "Psychic"],
+        fastMove: "Bullet Punch",
+        chargedMove: "Meteor Mash",
+        note: "Shadow variant hits extremely hard but is frail."
+      },
+      {
+        name: "Mega Metagross",
+        types: ["Steel", "Psychic"],
+        fastMove: "Bullet Punch",
+        chargedMove: "Meteor Mash",
+        note: "Outstanding Steel Mega with great bulk."
+      },
+      {
+        name: "Eternatus",
+        types: ["Poison", "Dragon"],
+        fastMove: "Dragon Tail",
+        chargedMove: "Dynamax Cannon",
+        note: "Dragon damage exploits Kyurem’s Dragon typing."
+      },
+      {
+        name: "Origin Dialga",
+        types: ["Steel", "Dragon"],
+        fastMove: "Metal Claw",
+        chargedMove: "Roar of Time",
+        note: "Steel and Dragon coverage, very strong generalist."
+      },
+    ],
+  },
+];
 
     // --- Populate boss datalist ---
     const bossInput = document.getElementById("boss-input");
@@ -378,110 +381,164 @@
       return weatherBoosts[weatherKey];
     }
 
-    function renderResults(boss, weatherKey) {
-      const container = document.getElementById("results");
-      container.innerHTML = "";
+    function getWeatherLabel(weatherKey) {
+  switch (weatherKey) {
+    case "clear":
+      return "Clear / Sunny";
+    case "rainy":
+      return "Rainy";
+    case "partly_cloudy":
+      return "Partly Cloudy";
+    case "cloudy":
+      return "Cloudy";
+    case "windy":
+      return "Windy";
+    case "snow":
+      return "Snow";
+    case "fog":
+      return "Fog";
+    default:
+      return "No weather boost";
+  }
+}
 
-      if (!boss) {
-        container.innerHTML =
-          '<div class="empty-state">No raid boss found. Try typing the exact name from the list (e.g., "Kyogre").</div>';
-        return;
-      }
+function renderResults(boss, weatherKey) {
+  const container = document.getElementById("results");
+  container.innerHTML = "";
 
-      const boostedTypes = getBoostedTypes(weatherKey);
+  if (!boss) {
+    container.innerHTML =
+      '<div class="empty-state">No raid boss found. Try typing "Kyurem" exactly as shown.</div>';
+    return;
+  }
 
-      // Sort counters: weather-boosted types first
-      const counters = boss.recommendedCounters.slice().sort((a, b) => {
-        const aBoosted = a.types.some((t) => boostedTypes.includes(t));
-        const bBoosted = b.types.some((t) => boostedTypes.includes(t));
-        if (aBoosted === bBoosted) return 0;
-        return aBoosted ? -1 : 1;
-      });
+  const boostedTypes = getBoostedTypes(weatherKey);
 
-      const header = document.createElement("div");
-      header.className = "results-header";
+  // Sort counters: weather-boosted types first
+  const counters = boss.recommendedCounters.slice().sort((a, b) => {
+    const aBoosted = a.types.some((t) => boostedTypes.includes(t));
+    const bBoosted = b.types.some((t) => boostedTypes.includes(t));
+    if (aBoosted === bBoosted) return 0;
+    return aBoosted ? -1 : 1;
+  });
 
-      const left = document.createElement("div");
-      left.innerHTML = `
-        <div class="boss-name">${boss.name}</div>
-        <div class="boss-meta">
-          Tier ${boss.tier}
-          ${boss.types
-            .map((t) => `<span class="type-badge">${t}</span>`)
-            .join(" ")}
-        </div>
-      `;
+  const header = document.createElement("div");
+  header.className = "results-header";
 
-      const right = document.createElement("div");
-      const weatherLabel = (() => {
-        switch (weatherKey) {
-          case "clear":
-            return "Clear / Sunny";
-          case "rainy":
-            return "Rainy";
-          case "partly_cloudy":
-            return "Partly Cloudy";
-          case "cloudy":
-            return "Cloudy";
-          case "windy":
-            return "Windy";
-          case "snow":
-            return "Snow";
-          case "fog":
-            return "Fog";
-          default:
-            return "No weather boost";
+  // Weather boosted weathers for this boss (Snow / Windy)
+  const boostedWeatherLabels = (boss.boostedWeathers || [])
+    .map((w) => getWeatherLabel(w))
+    .join(", ");
+
+  let metaHtml = `
+    <div class="boss-name">${boss.name}</div>
+    <div class="boss-meta">
+      Tier ${boss.tier}
+      ${boss.types
+        .map((t) => `<span class="type-badge">${t}</span>`)
+        .join(" ")}
+    </div>
+  `;
+
+  if (boss.catchCP) {
+    metaHtml += `
+      <div class="boss-meta">
+        Catch CP:
+        ${boss.catchCP.level20.min}&ndash;${boss.catchCP.level20.max}
+        (${boss.catchCP.level20.label})
+      </div>
+      <div class="boss-meta">
+        ${boss.catchCP.level25.min}&ndash;${boss.catchCP.level25.max}
+        (${boss.catchCP.level25.label})
+      </div>
+    `;
+  }
+
+  if (boss.shinyAvailable) {
+    metaHtml += `
+      <div class="boss-meta">
+        <span class="chip">Shiny available (≈1 in 20)</span>
+      </div>
+    `;
+  }
+
+  if (boostedWeatherLabels) {
+    metaHtml += `
+      <div class="boss-meta">
+        Weather boosted in: ${boostedWeatherLabels}
+      </div>
+    `;
+  }
+
+  if (boss.summary) {
+    metaHtml += `
+      <div class="boss-meta">
+        ${boss.summary}
+      </div>
+    `;
+  }
+
+  const left = document.createElement("div");
+  left.innerHTML = metaHtml;
+
+  const right = document.createElement("div");
+  const weatherLabel = getWeatherLabel(weatherKey);
+  right.innerHTML = `
+    <span class="chip">
+      Weather: ${weatherLabel}
+    </span>
+  `;
+
+  header.appendChild(left);
+  header.appendChild(right);
+  container.appendChild(header);
+
+  if (boss.recommendedTeam) {
+    const teamInfo = document.createElement("div");
+    teamInfo.className = "boss-meta";
+    teamInfo.style.marginTop = "0.5rem";
+    teamInfo.textContent = boss.recommendedTeam;
+    container.appendChild(teamInfo);
+  }
+
+  if (!counters.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.textContent = "No counters defined yet for this boss.";
+    container.appendChild(empty);
+    return;
+  }
+
+  counters.forEach((c) => {
+    const isBoosted = c.types.some((t) => boostedTypes.includes(t));
+    const card = document.createElement("article");
+    card.className = "counter-card";
+    card.innerHTML = `
+      <div class="counter-header">
+        <div class="counter-name">${c.name}</div>
+        ${
+          isBoosted
+            ? '<div class="boosted-tag">Weather boosted</div>'
+            : ""
         }
-      })();
-
-      right.innerHTML = `
-        <span class="chip">
-          Weather: ${weatherLabel}
-        </span>
-      `;
-
-      header.appendChild(left);
-      header.appendChild(right);
-      container.appendChild(header);
-
-      if (!counters.length) {
-        const empty = document.createElement("div");
-        empty.className = "empty-state";
-        empty.textContent = "No counters defined yet for this boss.";
-        container.appendChild(empty);
-        return;
+      </div>
+      <div class="moves">
+        <strong>Types:</strong> ${c.types
+          .map((t) => `<span class="type-badge">${t}</span>`)
+          .join(" ")}
+      </div>
+      <div class="moves">
+        <strong>Moveset:</strong> ${c.fastMove} &raquo; ${c.chargedMove}
+      </div>
+      ${
+        c.note
+          ? `<div class="note">${c.note}</div>`
+          : ""
       }
-
-      counters.forEach((c) => {
-        const isBoosted = c.types.some((t) => boostedTypes.includes(t));
-        const card = document.createElement("article");
-        card.className = "counter-card";
-        card.innerHTML = `
-          <div class="counter-header">
-            <div class="counter-name">${c.name}</div>
-            ${
-              isBoosted
-                ? '<div class="boosted-tag">Weather boosted</div>'
-                : ""
-            }
-          </div>
-          <div class="moves">
-            <strong>Types:</strong> ${c.types
-              .map((t) => `<span class="type-badge">${t}</span>`)
-              .join(" ")}
-          </div>
-          <div class="moves">
-            <strong>Moveset:</strong> ${c.fastMove} &raquo; ${c.chargedMove}
-          </div>
-          ${
-            c.note
-              ? `<div class="note">${c.note}</div>`
-              : ""
-          }
-        `;
-        container.appendChild(card);
-      });
-    }
+    `;
+    container.appendChild(card);
+  });
+}
 
     // --- Handle form submit ---
     const form = document.getElementById("raid-form");
@@ -494,6 +551,14 @@
       const boss = findBossByName(bossName);
       renderResults(boss, weatherKey);
     });
+    // Auto-load Kyurem as the default boss on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const defaultBossName = "Kyurem";
+  bossInput.value = defaultBossName;
+  const boss = findBossByName(defaultBossName);
+  renderResults(boss, "");
+});
+
   </script>
 </body>
 </html>
