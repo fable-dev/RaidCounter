@@ -13,7 +13,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
     background: white;
     border-radius: 20px;
@@ -21,9 +21,10 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
+/* Header */
 header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 header h1 {
@@ -37,112 +38,233 @@ header p {
     font-size: 1.1rem;
 }
 
-.current-boss {
-    text-align: center;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: #f7fafc;
+/* Boss Overview */
+.boss-overview {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
     border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
     border: 2px solid #e2e8f0;
 }
 
-.current-boss h2 {
-    margin-bottom: 15px;
+.boss-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.boss-header h2 {
     color: #2d3748;
-}
-
-.boss-types {
+    font-size: 2rem;
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
 }
 
-.weaknesses, .counters {
-    margin-bottom: 30px;
-    padding: 20px;
-    background: #f7fafc;
-    border-radius: 15px;
+.boss-tier {
+    background: #4299e1;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
-h3 {
-    margin-bottom: 15px;
+.boss-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .boss-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+.info-section h3 {
     color: #4a5568;
-    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
 }
 
-.weakness-list {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-/* Type badge styling */
+/* Type badges */
 .type-badge {
+    display: inline-block;
     padding: 8px 16px;
     border-radius: 50px;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 0.5px;
     color: white;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
-.dragon { background: #7038f8; }
-.ice { background: #98d8d8; }
-.fighting { background: #c03028; }
-.steel { background: #b8b8d0; }
-.fairy { background: #ee99ac; }
-.rock { background: #b8a038; }
+.dragon { background: linear-gradient(135deg, #7038f8, #5a2bc2); }
+.ice { background: linear-gradient(135deg, #98d8d8, #78b8b8); }
+.fighting { background: linear-gradient(135deg, #c03028, #a02020); }
+.steel { background: linear-gradient(135deg, #b8b8d0, #9898b8); }
+.fairy { background: linear-gradient(135deg, #ee99ac, #ce798c); }
+.rock { background: linear-gradient(135deg, #b8a038, #988020); }
 
-/* Counter item styling */
-.counter-item {
+.weakness-list, .boss-types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Weather badges */
+.weather-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.weather-badge {
     background: white;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid #cbd5e0;
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.counter-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* Counters Grid */
+.section-title {
+    color: #2d3748;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.counters-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+    .counters-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .counters-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Counter Cards */
+.counter-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.counter-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-color: #4299e1;
+}
+
+.counter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
 }
 
 .counter-name {
     font-weight: bold;
     font-size: 1.2rem;
     color: #2d3748;
-    margin-bottom: 5px;
+    flex: 1;
+}
+
+.counter-rank {
+    background: #4299e1;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .counter-types {
     display: flex;
-    gap: 5px;
-    margin-bottom: 10px;
+    gap: 8px;
+    margin-bottom: 15px;
 }
 
 .counter-moves {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: auto;
+}
+
+.move {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.move:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.move-type {
+    font-size: 0.8rem;
     color: #718096;
-    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.counter-moves span {
-    background: #edf2f7;
-    padding: 3px 8px;
-    border-radius: 5px;
-    margin-right: 5px;
+.move-name {
+    font-weight: 600;
+    color: #2d3748;
+    text-align: right;
 }
 
-/* Responsive */
-@media (max-width: 640px) {
+/* Responsive adjustments */
+@media (max-width: 768px) {
     .container {
         padding: 20px;
     }
     
     header h1 {
         font-size: 2rem;
+    }
+    
+    .boss-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .boss-header h2 {
+        font-size: 1.8rem;
     }
 }
