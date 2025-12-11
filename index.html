@@ -14,28 +14,42 @@
         </header>
 
         <main>
-            <section class="current-boss">
-                <h2>Current Boss: <span id="boss-name">Kyurem</span></h2>
-                <div class="boss-types">
-                    <span class="type-badge dragon">Dragon</span>
-                    <span class="type-badge ice">Ice</span>
+            <!-- Boss Overview -->
+            <section class="boss-overview">
+                <div class="boss-header">
+                    <h2>Kyurem <span class="boss-tier">Tier 5</span></h2>
+                    <div class="boss-types">
+                        <span class="type-badge dragon">Dragon</span>
+                        <span class="type-badge ice">Ice</span>
+                    </div>
+                </div>
+                
+                <div class="boss-info">
+                    <div class="info-section">
+                        <h3>Weaknesses</h3>
+                        <div class="weakness-list">
+                            <span class="type-badge fighting">Fighting</span>
+                            <span class="type-badge steel">Steel</span>
+                            <span class="type-badge fairy">Fairy</span>
+                            <span class="type-badge dragon">Dragon</span>
+                            <span class="type-badge rock">Rock</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3>Weather Boost</h3>
+                        <div class="weather-info">
+                            <span class="weather-badge">❄️ Snow</span>
+                            <span class="weather-badge">🌪️ Windy</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="weaknesses">
-                <h3>Weak To:</h3>
-                <div class="weakness-list">
-                    <span class="type-badge fighting">Fighting</span>
-                    <span class="type-badge steel">Steel</span>
-                    <span class="type-badge fairy">Fairy</span>
-                    <span class="type-badge dragon">Dragon</span>
-                    <span class="type-badge rock">Rock</span>
-                </div>
-            </section>
-
-            <section class="counters">
-                <h3>Best Counters:</h3>
-                <div id="counters-list">
+            <!-- Counters Grid -->
+            <section class="counters-grid">
+                <h2 class="section-title">Best Counters</h2>
+                <div id="counters-container" class="counters-container">
                     <!-- Counters will be added by JavaScript -->
                 </div>
             </section>
