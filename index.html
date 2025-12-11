@@ -1,100 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pokémon GO Raid Counter Simplifier – Kyurem</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Simple Pokémon GO raid counter tool for Kyurem. Choose weather and get clean, weather-aware counter suggestions."
-  />
-  <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon GO Raid Counter</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app">
-    <header>
-  <h1>Raid Counter Simplifier</h1>
-  <p class="subtitle">
-    Choose a raid boss and weather to see fast, clear counter recommendations.
-  </p>
-</header>
+    <div class="container">
+        <header>
+            <h1>Raid Counter Helper</h1>
+            <p>Simple tool to find the best Pokémon for raids</p>
+        </header>
 
+        <main>
+            <section class="current-boss">
+                <h2>Current Boss: <span id="boss-name">Kyurem</span></h2>
+                <div class="boss-types">
+                    <span class="type-badge dragon">Dragon</span>
+                    <span class="type-badge ice">Ice</span>
+                </div>
+            </section>
 
-    <div class="hero-banner" id="hero-banner">
-  <div class="hero-text">
-    <h2 id="hero-title"></h2>
-    <p id="hero-line-1"></p>
-    <p id="hero-line-2"></p>
-    <p id="hero-line-3"></p>
-  </div>
-  <div class="hero-meta">
-    <div class="hero-pill" id="hero-pill"></div>
-    <div class="hero-icon" id="hero-icon">⭐</div>
-  </div>
-</div>
+            <section class="weaknesses">
+                <h3>Weak To:</h3>
+                <div class="weakness-list">
+                    <span class="type-badge fighting">Fighting</span>
+                    <span class="type-badge steel">Steel</span>
+                    <span class="type-badge fairy">Fairy</span>
+                    <span class="type-badge dragon">Dragon</span>
+                    <span class="type-badge rock">Rock</span>
+                </div>
+            </section>
 
-    <main class="card">
-  <form id="raid-form">
-    <div class="form-grid">
-      <div class="form-row">
-        <label for="boss-input">Raid boss</label>
-        <input
-          id="boss-input"
-          name="boss"
-          list="boss-list"
-          placeholder="e.g. Kyurem"
-          autocomplete="off"
-        />
-        <datalist id="boss-list">
-          <!-- Populated by JS -->
-        </datalist>
-      </div>
-
-      <div class="form-row">
-        <label for="weather-select">Weather</label>
-        <select id="weather-select" name="weather">
-          <option value="">No boost / Unknown</option>
-          <option value="clear">Clear / Sunny</option>
-          <option value="rainy">Rainy</option>
-          <option value="partly_cloudy">Partly Cloudy</option>
-          <option value="cloudy">Cloudy</option>
-          <option value="windy">Windy</option>
-          <option value="snow">Snow</option>
-          <option value="fog">Fog</option>
-        </select>
-      </div>
-
-      <div class="form-row">
-        <label>&nbsp;</label>
-        <button type="submit">Suggest counters</button>
-      </div>
+            <section class="counters">
+                <h3>Best Counters:</h3>
+                <div id="counters-list">
+                    <!-- Counters will be added by JavaScript -->
+                </div>
+            </section>
+        </main>
     </div>
-  </form>
 
-  <div class="section-divider"></div>
-
-  <h2 class="section-title">Kyurem raid overview</h2>
-  <section id="results" class="results"></section>
-
-  <div class="section-divider"></div>
-
-  <h2 class="section-title">Raid tips</h2>
-  <section class="tips">
-    <ul>
-      <li>Dodge <strong>Draco Meteor</strong> to reduce group fainting.</li>
-      <li>Prioritize strong <strong>Steel</strong> and <strong>Fighting</strong> types for best efficiency.</li>
-      <li>Use <strong>Mega</strong> evolutions to boost both your damage and your lobby’s damage.</li>
-      <li>Snow or Windy weather will boost Kyurem’s CP and damage.</li>
-    </ul>
-  </section>
-
-  <p class="hint">
-    This page auto-loads Kyurem. When raid bosses rotate, you can simply update the data file to switch focus.
-  </p>
-</main>
-  </div>
-
-  <!-- Main app script, using ES modules -->
-  <script type="module" src="js/app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
