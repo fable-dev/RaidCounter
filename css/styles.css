@@ -1,1 +1,156 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f5fb;
+  color: #222;
+}
+
+.header {
+  background: linear-gradient(135deg, #3466af, #ef5350);
+  color: #fff;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+.header p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.main {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem 2rem;
+}
+
+.controls {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.controls label {
+  font-weight: 600;
+}
+
+.controls select {
+  min-width: 220px;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.4rem;
+  border: 1px solid #ccd0da;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.results {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.results h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.results .boss-meta {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: #666;
+}
+
+.type-pill {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-right: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: #e3e7f2;
+}
+
+.counter-list {
+  list-style: decimal;
+  padding-left: 1.4rem;
+  margin: 0;
+}
+
+.counter-item {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid #edf0f7;
+}
+
+.counter-item:last-child {
+  border-bottom: none;
+}
+
+.counter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.counter-name {
+  font-weight: 600;
+}
+
+.counter-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tag-top {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.tag-good {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.tag-budget {
+  background: #fff8e1;
+  color: #ff8f00;
+}
+
+.counter-moves {
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.counter-moves span {
+  display: block;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem 0 1.5rem;
+  font-size: 0.8rem;
+  color: #777;
+}
 
