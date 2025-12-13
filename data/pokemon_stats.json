@@ -1,1 +1,23 @@
+[
+  {
+    "id": "rayquaza",
+    "name": "Rayquaza",
+    "types": ["dragon", "flying"],
+    "attack": 284,
+    "defense": 170,
+    "stamina": 213,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "mega_rayquaza",
+    "name": "Mega Rayquaza",
+    "types": ["dragon", "flying"],
+    "attack": 389,
+    "defense": 216,
+    "stamina": 233,
+    "is_mega": true,
+    "is_shadow": false
+  }
+]
 
