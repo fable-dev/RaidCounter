@@ -1,5 +1,113 @@
 [
   {
+    "id": "powder_snow",
+    "name": "Powder Snow",
+    "type": "ice",
+    "category": "fast",
+    "power": 6,
+    "duration": 1.0,
+    "energy_gain": 8
+  },
+  {
+    "id": "avalanche",
+    "name": "Avalanche",
+    "type": "ice",
+    "category": "charged",
+    "power": 90,
+    "duration": 2.7,
+    "energy_cost": 45
+  },
+  {
+    "id": "snarl",
+    "name": "Snarl",
+    "type": "dark",
+    "category": "fast",
+    "power": 12,
+    "duration": 1.1,
+    "energy_gain": 13
+  },
+  {
+    "id": "ice_fang",
+    "name": "Ice Fang",
+    "type": "ice",
+    "category": "fast",
+    "power": 12,
+    "duration": 1.0,
+    "energy_gain": 8
+  },
+  {
+    "id": "smack_down",
+    "name": "Smack Down",
+    "type": "rock",
+    "category": "fast",
+    "power": 16,
+    "duration": 1.2,
+    "energy_gain": 8
+  },
+  {
+    "id": "rock_slide",
+    "name": "Rock Slide",
+    "type": "rock",
+    "category": "charged",
+    "power": 80,
+    "duration": 2.7,
+    "energy_cost": 45
+  },
+  {
+    "id": "thunder_shock",
+    "name": "Thunder Shock",
+    "type": "electric",
+    "category": "fast",
+    "power": 5,
+    "duration": 0.6,
+    "energy_gain": 8
+  },
+  {
+    "id": "wild_charge",
+    "name": "Wild Charge",
+    "type": "electric",
+    "category": "charged",
+    "power": 100,
+    "duration": 2.6,
+    "energy_cost": 50
+  },
+  {
+    "id": "razor_leaf",
+    "name": "Razor Leaf",
+    "type": "grass",
+    "category": "fast",
+    "power": 13,
+    "duration": 1.0,
+    "energy_gain": 7
+  },
+  {
+    "id": "grass_knot",
+    "name": "Grass Knot",
+    "type": "grass",
+    "category": "charged",
+    "power": 90,
+    "duration": 2.6,
+    "energy_cost": 50
+  },
+  {
+    "id": "waterfall",
+    "name": "Waterfall",
+    "type": "water",
+    "category": "fast",
+    "power": 16,
+    "duration": 1.2,
+    "energy_gain": 8
+  },
+  {
+    "id": "hydro_pump",
+    "name": "Hydro Pump",
+    "type": "water",
+    "category": "charged",
+    "power": 130,
+    "duration": 3.3,
+    "energy_cost": 75
+  },
+  {
     "id": "dragon_tail",
     "name": "Dragon Tail",
     "type": "dragon",
@@ -15,7 +123,6 @@
     "category": "charged",
     "power": 110,
     "duration": 3.9,
-    "energy_cost": 50
+    "energy_cost": 60
   }
 ]
-
