@@ -1,15 +1,20 @@
 [
   {
-    "id": "mega_charizard_y",
-    "name": "Mega Charizard Y",
-    "tier": 4,
-    "types": ["fire", "flying"]
+    "id": "rayquaza_raid",
+    "name": "Rayquaza",
+    "tier": 5,
+    "types": ["dragon", "flying"]
   },
   {
     "id": "groudon",
     "name": "Groudon",
     "tier": 5,
     "types": ["ground"]
+  },
+  {
+    "id": "kyogre_raid",
+    "name": "Kyogre",
+    "tier": 5,
+    "types": ["water"]
   }
 ]
-
