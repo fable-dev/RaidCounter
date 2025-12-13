@@ -1,1 +1,15 @@
+[
+  {
+    "id": "mega_charizard_y",
+    "name": "Mega Charizard Y",
+    "tier": 4,
+    "types": ["fire", "flying"]
+  },
+  {
+    "id": "groudon",
+    "name": "Groudon",
+    "tier": 5,
+    "types": ["ground"]
+  }
+]
 
