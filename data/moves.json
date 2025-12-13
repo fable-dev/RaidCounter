@@ -1,1 +1,21 @@
+[
+  {
+    "id": "dragon_tail",
+    "name": "Dragon Tail",
+    "type": "dragon",
+    "category": "fast",
+    "power": 15,
+    "duration": 1.1,
+    "energy_gain": 9
+  },
+  {
+    "id": "outrage",
+    "name": "Outrage",
+    "type": "dragon",
+    "category": "charged",
+    "power": 110,
+    "duration": 3.9,
+    "energy_cost": 50
+  }
+]
 
