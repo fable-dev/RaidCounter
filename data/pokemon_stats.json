@@ -1,23 +1,82 @@
 [
   {
-    "id": "rayquaza",
-    "name": "Rayquaza",
+    "id": "mamoswine",
+    "name": "Mamoswine",
+    "types": ["ice", "ground"],
+    "attack": 247,
+    "defense": 146,
+    "stamina": 242,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "weavile",
+    "name": "Weavile",
+    "types": ["dark", "ice"],
+    "attack": 243,
+    "defense": 171,
+    "stamina": 172,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "galarian_darmanitan",
+    "name": "Galarian Darmanitan",
+    "types": ["ice"],
+    "attack": 263,
+    "defense": 114,
+    "stamina": 233,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "rampardos",
+    "name": "Rampardos",
+    "types": ["rock"],
+    "attack": 295,
+    "defense": 109,
+    "stamina": 219,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "raikou",
+    "name": "Raikou",
+    "types": ["electric"],
+    "attack": 241,
+    "defense": 195,
+    "stamina": 207,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "roserade",
+    "name": "Roserade",
+    "types": ["grass", "poison"],
+    "attack": 243,
+    "defense": 185,
+    "stamina": 155,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "kyogre_attacker",
+    "name": "Kyogre (Attacker)",
+    "types": ["water"],
+    "attack": 270,
+    "defense": 228,
+    "stamina": 205,
+    "is_mega": false,
+    "is_shadow": false
+  },
+  {
+    "id": "rayquaza_attacker",
+    "name": "Rayquaza (Attacker)",
     "types": ["dragon", "flying"],
     "attack": 284,
     "defense": 170,
     "stamina": 213,
     "is_mega": false,
     "is_shadow": false
-  },
-  {
-    "id": "mega_rayquaza",
-    "name": "Mega Rayquaza",
-    "types": ["dragon", "flying"],
-    "attack": 389,
-    "defense": 216,
-    "stamina": 233,
-    "is_mega": true,
-    "is_shadow": false
   }
 ]
-
